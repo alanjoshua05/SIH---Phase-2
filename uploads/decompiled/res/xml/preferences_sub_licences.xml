@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:key="preferences_root"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference android:title="@string/preference_licence_open_camera" android:key="preference_licence_open_camera" android:summary="@string/preference_licence_open_camera_text" />
+    <Preference android:title="@string/preference_licence_androidx" android:key="preference_licence_androidx" android:summary="@string/preference_licence_androidx_text" />
+    <Preference android:title="@string/preference_licence_google_icons" android:key="preference_licence_google_icons" android:summary="@string/preference_licence_google_icons_text" />
+    <Preference android:title="@string/preference_licence_online" android:key="preference_licence_online" android:summary="@string/preference_licence_online_text" />
+</PreferenceScreen>

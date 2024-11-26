@@ -130,7 +130,15 @@ const FileUploader = () => {
             });
 
             if (response.ok) {
-                console.log("Permissions updated successfully!");
+                const data = await response.json();
+                console.log("Permissions updated successfully!", data);
+
+                // Store the download link from the response
+                if (data.downloadLink) {
+                    setDownloadLink(data.downloadLink);
+                } else {
+                    console.error("Download link not provided in the response.");
+                }
             } else {
                 console.error("Failed to update permissions");
             }
@@ -198,6 +206,33 @@ const FileUploader = () => {
         }
     };
 
+    const handleDownload = async () => {
+        try {
+          const response = await fetch('http://127.0.0.1:4500/download', {
+            method: 'GET',
+          });
+    
+          if (!response.ok) {
+            throw new Error('Failed to download the APK');
+          }
+    
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+    
+          // Create a temporary link element for the download
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'Modified_apk.apk'; // Friendly name for the download
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+    
+          console.log('APK downloaded successfully');
+        } catch (error) {
+          console.error('Error during APK download:', error);
+        }
+      };
+
     return (
         <div style={{
             height: "100vh",
@@ -219,7 +254,7 @@ const FileUploader = () => {
                                             <input className="input" name="file" type="file" accept=".apk" onChange={handleFileChange} />
                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" strokeLinejoin="round" strokeLinecap="round" viewBox="0 0 24 24" strokeWidth="2" fill="none" stroke="currentColor" className="icon"><polyline points="16 16 12 12 8 16"></polyline><line y2="21" x2="12" y1="12" x1="12"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
                                         </div>
-                                        <p className="font-sans mt-10 font-bold text-3xl text-white">Uplaod the APK</p>
+                                        <p className="font-sans mt-10 font-bold text-3xl text-white">Upload the APK</p>
                                         <CircularProgress sx={{ mt: 5, display: loading ? "flex" : "none" }} />
                                     </div>
                                 </div>
@@ -283,7 +318,7 @@ const FileUploader = () => {
                             <div style={{ borderRadius: "15px" }} className="p-5">
                                 <div className="flex justify-center items-center">
                                     <div className="voltage-button mt-8">
-                                        {uploaded ? <button>Download APK</button> : <button onClick={handleOpen}>Add Security</button>}
+                                        {uploaded ? <button onClick={handleDownload}>Download APK</button> : <button onClick={handleOpen}>Add Security</button>}
 
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 234.6 61.3" preserveAspectRatio="none" xmlSpace="preserve">
 

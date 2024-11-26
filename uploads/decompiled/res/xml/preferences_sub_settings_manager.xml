@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:key="preferences_root"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference android:icon="@drawable/ic_save_white_48dp" android:title="@string/preference_save_settings" android:key="preference_save_settings" android:summary="@string/preference_save_settings_summary" />
+    <Preference android:icon="@drawable/baseline_folder_open_white_48" android:title="@string/preference_restore_settings" android:key="preference_restore_settings" android:summary="@string/preference_restore_settings_summary" />
+    <Preference android:icon="@drawable/ic_power_settings_new_white_48dp" android:title="@string/preference_reset" android:key="preference_reset" android:summary="@string/preference_reset_summary" />
+</PreferenceScreen>
