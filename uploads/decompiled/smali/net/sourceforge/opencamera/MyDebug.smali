@@ -4,7 +4,7 @@
 
 
 # static fields
-.field public static final LOG:Z = false
+.field public static final LOG:Z
 
 
 # direct methods

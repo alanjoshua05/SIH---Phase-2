@@ -45,9 +45,9 @@
 
 .field private static final WATER_DENSITY_SALTWATER:F = 1.03f
 
-.field private static activity_count:I = 0x0
+.field private static activity_count:I
 
-.field public static final lock_to_landscape:Z = false
+.field public static final lock_to_landscape:Z
 
 .field public static test_force_supports_camera2:Z
 

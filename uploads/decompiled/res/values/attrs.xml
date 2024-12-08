@@ -45,12 +45,12 @@
     <attr name="allowStacking" format="boolean" />
     <attr name="alpha" format="float" />
     <attr name="alphabeticModifiers">
-        <flag name="META" value="0x00010000" />
-        <flag name="CTRL" value="0x00001000" />
         <flag name="ALT" value="0x00000002" />
+        <flag name="CTRL" value="0x00001000" />
+        <flag name="FUNCTION" value="0x00000008" />
+        <flag name="META" value="0x00010000" />
         <flag name="SHIFT" value="0x00000001" />
         <flag name="SYM" value="0x00000004" />
-        <flag name="FUNCTION" value="0x00000008" />
     </attr>
     <attr name="arrowHeadLength" format="dimension" />
     <attr name="arrowShaftLength" format="dimension" />
@@ -68,12 +68,12 @@
     <attr name="backgroundStacked" format="reference|color" />
     <attr name="backgroundTint" format="color" />
     <attr name="backgroundTintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="barLength" format="dimension" />
     <attr name="borderlessButtonStyle" format="reference" />
@@ -84,9 +84,9 @@
     <attr name="buttonBarStyle" format="reference" />
     <attr name="buttonCompat" format="reference" />
     <attr name="buttonGravity">
+        <flag name="bottom" value="0x00000050" />
         <flag name="center_vertical" value="0x00000010" />
         <flag name="top" value="0x00000030" />
-        <flag name="bottom" value="0x00000050" />
     </attr>
     <attr name="buttonIconDimen" format="dimension" />
     <attr name="buttonPanelSideLayout" format="reference" />
@@ -94,22 +94,22 @@
     <attr name="buttonStyleSmall" format="reference" />
     <attr name="buttonTint" format="color" />
     <attr name="buttonTintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="checkMarkCompat" format="reference" />
     <attr name="checkMarkTint" format="color" />
     <attr name="checkMarkTintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="checkboxStyle" format="reference" />
     <attr name="checkedTextViewStyle" format="reference" />
@@ -144,13 +144,13 @@
     <attr name="dialogPreferredPadding" format="dimension" />
     <attr name="dialogTheme" format="reference" />
     <attr name="displayOptions">
-        <flag name="none" value="0x00000000" />
-        <flag name="useLogo" value="0x00000001" />
-        <flag name="showHome" value="0x00000002" />
-        <flag name="homeAsUp" value="0x00000004" />
-        <flag name="showTitle" value="0x00000008" />
-        <flag name="showCustom" value="0x00000010" />
         <flag name="disableHome" value="0x00000020" />
+        <flag name="homeAsUp" value="0x00000004" />
+        <flag name="none" value="0x00000000" />
+        <flag name="showCustom" value="0x00000010" />
+        <flag name="showHome" value="0x00000002" />
+        <flag name="showTitle" value="0x00000008" />
+        <flag name="useLogo" value="0x00000001" />
     </attr>
     <attr name="divider" format="reference" />
     <attr name="dividerHorizontal" format="reference" />
@@ -164,12 +164,12 @@
     <attr name="drawableStartCompat" format="reference" />
     <attr name="drawableTint" format="color" />
     <attr name="drawableTintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="drawableTopCompat" format="reference" />
     <attr name="drawerArrowStyle" format="reference" />
@@ -187,8 +187,8 @@
     <attr name="fontProviderAuthority" format="string" />
     <attr name="fontProviderCerts" format="reference" />
     <attr name="fontProviderFetchStrategy">
-        <enum name="blocking" value="0" />
         <enum name="async" value="1" />
+        <enum name="blocking" value="0" />
     </attr>
     <attr name="fontProviderFetchTimeout" format="integer">
         <enum name="forever" value="-1" />
@@ -197,8 +197,8 @@
     <attr name="fontProviderQuery" format="string" />
     <attr name="fontProviderSystemFontFamily" format="string" />
     <attr name="fontStyle">
-        <enum name="normal" value="0" />
         <enum name="italic" value="1" />
+        <enum name="normal" value="0" />
     </attr>
     <attr name="fontVariationSettings" format="string" />
     <attr name="fontWeight" format="integer" />
@@ -211,12 +211,12 @@
     <attr name="icon" format="reference" />
     <attr name="iconTint" format="color" />
     <attr name="iconTintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="iconifiedByDefault" format="boolean" />
     <attr name="imageButtonStyle" format="reference" />
@@ -230,40 +230,40 @@
     <attr name="layout" format="reference" />
     <attr name="layout_anchor" format="reference" />
     <attr name="layout_anchorGravity">
-        <flag name="top" value="0x00000030" />
         <flag name="bottom" value="0x00000050" />
+        <flag name="center" value="0x00000011" />
+        <flag name="center_horizontal" value="0x00000001" />
+        <flag name="center_vertical" value="0x00000010" />
+        <flag name="clip_horizontal" value="0x00000008" />
+        <flag name="clip_vertical" value="0x00000080" />
+        <flag name="end" value="0x00800005" />
+        <flag name="fill" value="0x00000077" />
+        <flag name="fill_horizontal" value="0x00000007" />
+        <flag name="fill_vertical" value="0x00000070" />
         <flag name="left" value="0x00000003" />
         <flag name="right" value="0x00000005" />
-        <flag name="center_vertical" value="0x00000010" />
-        <flag name="fill_vertical" value="0x00000070" />
-        <flag name="center_horizontal" value="0x00000001" />
-        <flag name="fill_horizontal" value="0x00000007" />
-        <flag name="center" value="0x00000011" />
-        <flag name="fill" value="0x00000077" />
-        <flag name="clip_vertical" value="0x00000080" />
-        <flag name="clip_horizontal" value="0x00000008" />
         <flag name="start" value="0x00800003" />
-        <flag name="end" value="0x00800005" />
+        <flag name="top" value="0x00000030" />
     </attr>
     <attr name="layout_behavior" format="string" />
     <attr name="layout_dodgeInsetEdges">
-        <flag name="none" value="0x00000000" />
-        <flag name="top" value="0x00000030" />
+        <flag name="all" value="0x00000077" />
         <flag name="bottom" value="0x00000050" />
+        <flag name="end" value="0x00800005" />
         <flag name="left" value="0x00000003" />
+        <flag name="none" value="0x00000000" />
         <flag name="right" value="0x00000005" />
         <flag name="start" value="0x00800003" />
-        <flag name="end" value="0x00800005" />
-        <flag name="all" value="0x00000077" />
+        <flag name="top" value="0x00000030" />
     </attr>
     <attr name="layout_insetEdge">
-        <enum name="none" value="0" />
-        <enum name="top" value="48" />
         <enum name="bottom" value="80" />
+        <enum name="end" value="8388613" />
         <enum name="left" value="3" />
+        <enum name="none" value="0" />
         <enum name="right" value="5" />
         <enum name="start" value="8388611" />
-        <enum name="end" value="8388613" />
+        <enum name="top" value="48" />
     </attr>
     <attr name="layout_keyline" format="integer" />
     <attr name="lineHeight" format="dimension" />
@@ -291,18 +291,18 @@
     <attr name="navigationContentDescription" format="string" />
     <attr name="navigationIcon" format="reference" />
     <attr name="navigationMode">
-        <enum name="normal" value="0" />
         <enum name="listMode" value="1" />
+        <enum name="normal" value="0" />
         <enum name="tabMode" value="2" />
     </attr>
     <attr name="nestedScrollViewStyle" format="reference" />
     <attr name="numericModifiers">
-        <flag name="META" value="0x00010000" />
-        <flag name="CTRL" value="0x00001000" />
         <flag name="ALT" value="0x00000002" />
+        <flag name="CTRL" value="0x00001000" />
+        <flag name="FUNCTION" value="0x00000008" />
+        <flag name="META" value="0x00010000" />
         <flag name="SHIFT" value="0x00000001" />
         <flag name="SYM" value="0x00000004" />
-        <flag name="FUNCTION" value="0x00000008" />
     </attr>
     <attr name="overlapAnchor" format="boolean" />
     <attr name="paddingBottomNoButtons" format="dimension" />
@@ -333,17 +333,17 @@
     <attr name="selectableItemBackgroundBorderless" format="reference" />
     <attr name="shortcutMatchRequired" format="boolean" />
     <attr name="showAsAction">
-        <flag name="never" value="0x00000000" />
-        <flag name="ifRoom" value="0x00000001" />
         <flag name="always" value="0x00000002" />
-        <flag name="withText" value="0x00000004" />
         <flag name="collapseActionView" value="0x00000008" />
+        <flag name="ifRoom" value="0x00000001" />
+        <flag name="never" value="0x00000000" />
+        <flag name="withText" value="0x00000004" />
     </attr>
     <attr name="showDividers">
-        <flag name="none" value="0x00000000" />
         <flag name="beginning" value="0x00000001" />
-        <flag name="middle" value="0x00000002" />
         <flag name="end" value="0x00000004" />
+        <flag name="middle" value="0x00000002" />
+        <flag name="none" value="0x00000000" />
     </attr>
     <attr name="showText" format="boolean" />
     <attr name="showTitle" format="boolean" />
@@ -383,31 +383,31 @@
     <attr name="thumbTextPadding" format="dimension" />
     <attr name="thumbTint" format="color" />
     <attr name="thumbTintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="tickMark" format="reference" />
     <attr name="tickMarkTint" format="color" />
     <attr name="tickMarkTintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="tint" format="color" />
     <attr name="tintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="title" format="string" />
     <attr name="titleMargin" format="dimension" />
@@ -427,12 +427,12 @@
     <attr name="track" format="reference" />
     <attr name="trackTint" format="color" />
     <attr name="trackTintMode">
-        <enum name="src_over" value="3" />
-        <enum name="src_in" value="5" />
-        <enum name="src_atop" value="9" />
+        <enum name="add" value="16" />
         <enum name="multiply" value="14" />
         <enum name="screen" value="15" />
-        <enum name="add" value="16" />
+        <enum name="src_atop" value="9" />
+        <enum name="src_in" value="5" />
+        <enum name="src_over" value="3" />
     </attr>
     <attr name="ttcIndex" format="integer" />
     <attr name="viewInflaterClass" format="string" />

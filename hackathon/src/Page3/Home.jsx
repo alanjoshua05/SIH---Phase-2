@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Carousel from "react-material-ui-carousel";
 import Navbar from './Navbar';
+import Login from '../Pages2/Login';
 export default function Home() {
     return (
         <div
@@ -62,19 +63,15 @@ function Main() {
                             <p style={{ lineHeight: "30px" }} className="mt-6 font-sans text-center text-xl text-white text-justify">
                                 Join us in securing India's digital future and be a part of an ecosystem with a secure Android application, one click at a time
                             </p>
-                            <Link to="/api">
-                                <button
-                                    style={{ background: "rgba(42, 161, 255, 1)" }}
-                                    className="btn mt-8 p-3 rounded-xl font-bold text-white hover:scale-110 transition-transform duration-300"
-                                >
-                                    Get Started
-                                </button>
-                            </Link>
                         </div>
+                    </div>
+                    <div data-aos="fade-right"
+                        data-aos-duration="600" className='mt-5'>
+                        <Login />
                     </div>
                 </Box>
             </div>
-            
+
         </div>
     );
 }

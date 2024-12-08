@@ -68,6 +68,7 @@ const FileUploader = () => {
     const [permissions, setPermissions] = useState([])
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = useState(false)
+    const [manual, setManual] = useState(false);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -116,6 +117,7 @@ const FileUploader = () => {
     const handleApply = async () => {
         const payload = {
             selectedPermissions: selectedOptions,
+            toggleStatus: manual,
         };
 
         console.log("Sending to backend:", payload);
@@ -208,30 +210,34 @@ const FileUploader = () => {
 
     const handleDownload = async () => {
         try {
-          const response = await fetch('http://127.0.0.1:4500/download', {
-            method: 'GET',
-          });
-    
-          if (!response.ok) {
-            throw new Error('Failed to download the APK');
-          }
-    
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-    
-          // Create a temporary link element for the download
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'Modified_apk.apk'; // Friendly name for the download
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-    
-          console.log('APK downloaded successfully');
+            const response = await fetch('http://127.0.0.1:4500/download', {
+                method: 'GET',
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to download the APK');
+            }
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+
+            // Create a temporary link element for the download
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Modified_apk.apk'; // Friendly name for the download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            console.log('APK downloaded successfully');
         } catch (error) {
-          console.error('Error during APK download:', error);
+            console.error('Error during APK download:', error);
         }
-      };
+    };
+
+    function handleManual(e) {
+        setManual(e.target.checked);
+    }
 
     return (
         <div style={{
@@ -256,6 +262,7 @@ const FileUploader = () => {
                                         </div>
                                         <p className="font-sans mt-10 font-bold text-3xl text-white">Upload the APK</p>
                                         <CircularProgress sx={{ mt: 5, display: loading ? "flex" : "none" }} />
+
                                     </div>
                                 </div>
                                 {permissions.length > 0 && (
@@ -318,7 +325,26 @@ const FileUploader = () => {
                             <div style={{ borderRadius: "15px" }} className="p-5">
                                 <div className="flex justify-center items-center">
                                     <div className="voltage-button mt-8">
-                                        {uploaded ? <button onClick={handleDownload}>Download APK</button> : <button onClick={handleOpen}>Add Security</button>}
+                                        {uploaded ? (
+                                            manual ? (
+                                                <div>
+                                                    <div class="flex items-center p-4 mb-4 text-white border border-blue-800 rounded-lg bg-gray-800 " role="alert">
+                                                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                                        </svg>
+                                                        <span class="sr-only">Info</span>
+                                                        <div>
+                                                            <span style={{fontWeight:800}} class="font-medium">Info alert!</span> The requirements has been uploaded sucessfully, you'll get your modified apk in 2 working days.
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            ) : (
+                                                <button onClick={handleDownload}>Download APK</button>
+                                            )
+                                        ) : (
+                                            <button onClick={handleOpen}>Add Security</button>
+                                        )}
 
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 234.6 61.3" preserveAspectRatio="none" xmlSpace="preserve">
 
@@ -368,9 +394,35 @@ const FileUploader = () => {
                                             style={{ maxWidth: "80vw", maxHeight: "80vh", overflowY: "auto" }}
                                         >
                                             <Box p={4} ml={0}>
-                                                <p className="font-sans font-bold text-2xl md:text-3xl text-white">
-                                                    Toggle Options
-                                                </p>
+                                                <div className="flex justify-between items-center">
+                                                    <p className="font-sans font-bold text-2xl md:text-4xl text-white">
+                                                        Toggle Options
+                                                    </p>
+                                                    <div className="checkbox-wrapper-35 mt-2 relative">
+                                                        <input
+                                                            value="private"
+                                                            name="switch"
+                                                            id="switch"
+                                                            type="checkbox"
+                                                            className="switch"
+                                                            checked={manual}
+                                                            onChange={handleManual}
+                                                        />
+                                                        <label htmlFor="switch">
+                                                            <span className="switch-x-text">This is </span>
+                                                            <span className="switch-x-toggletext">
+                                                                <span className="switch-x-unchecked">
+                                                                    <span className="switch-x-hiddenlabel">Unchecked: </span>Automatic
+                                                                </span>
+                                                                <span className="switch-x-checked">
+                                                                    <span className="switch-x-hiddenlabel">Checked: </span>Manual
+                                                                </span>
+                                                            </span>
+                                                        </label>
+
+                                                    </div>
+                                                </div>
+
                                                 <hr
                                                     className="my-4 md:my-7"
                                                     style={{ color: "black", background: "black" }}
@@ -444,7 +496,7 @@ const FileUploader = () => {
                                                                 onClick={handleApply}
                                                                 disabled={uploading}
                                                             >
-                                                                {uploading ? "Modifying APK...." : "Apply"}
+                                                                {uploading ? "Uploading..." : "Upload"}
                                                             </button>
                                                         )}
                                                     </div>
@@ -456,7 +508,6 @@ const FileUploader = () => {
                             </div>
                         </Box>
                     )}
-
                 </div>
             </div>
         </div>
@@ -552,14 +603,14 @@ const Sidebar = () => {
                             >
                                 <Avatar
                                     alt="Remy Sharp"
-                                    src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg"
+                                    src="https://i1.sndcdn.com/avatars-000638476566-vbdo7x-t500x500.jpg"
                                 />
                             </span>
                             {isOpen && (
                                 <span className="flex gap-5">
                                     <Avatar
                                         alt="Remy Sharp"
-                                        src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg"
+                                        src="https://i1.sndcdn.com/avatars-000638476566-vbdo7x-t500x500.jpg"
                                     />
                                     <p className="mt-2">Account</p>
                                 </span>

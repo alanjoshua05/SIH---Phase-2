@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 from flask_cors import CORS
 import shutil
 import os
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -20,8 +21,11 @@ KEY_ALIAS = 'my-key-alias'
 KEYSTORE_PASSWORD = 'alan#2005'
 KEY_PASSWORD = 'alan#2005'
 
+file_name = None
+
 @app.route('/upload', methods=['POST'])
 def upload_apk():
+    global file_name
     print("Request received at /upload")
 
     if 'apkfile' not in request.files:
@@ -37,6 +41,7 @@ def upload_apk():
 
     if file and file.filename.endswith('.apk'):
         apk_path = UPLOAD_FOLDER / file.filename
+        file_name = file.filename
         file.save(apk_path)
 
         decompiled_folder = UPLOAD_FOLDER / 'decompiled'
@@ -96,7 +101,21 @@ def toggle():
     try:
         data = request.get_json()
         selected_permissions = data.get('selectedPermissions', [])
+        toggle_status = data.get('toggleStatus', False)  # Check toggle status
         print(f"Received selected permissions: {selected_permissions}")
+        print(f"Toggle status: {toggle_status}")
+
+        if toggle_status:
+            json_data = {
+                "fileName": file_name,  # Replace with the actual file name
+                "selectedOptions": selected_permissions
+            }
+            json_file_path = f"{UPLOAD_FOLDER}/toggle_data.json"
+            with open(json_file_path, "w") as json_file:
+                json.dump(json_data, json_file)
+            print(f"Data saved to {json_file_path}")
+            return jsonify({"status": "success", "message": "Data saved successfully"}), 200
+
 
         permission_mapping = {
             'Disable External Storage Access': 'android.permission.MANAGE_EXTERNAL_STORAGE',
@@ -187,7 +206,7 @@ def zipalign_apk(input_apk, output_apk):
     """Run zipalign to align the APK."""
     zipalign_path = os.path.join(BUILD_TOOLS_PATH, 'zipalign')
 
-    # Ensure output path is different from input path
+    
     aligned_apk = output_apk.parent / ('aligned_' + output_apk.name)
 
     cmd = [zipalign_path, '-v', '4', str(input_apk), str(aligned_apk)]
@@ -195,7 +214,7 @@ def zipalign_apk(input_apk, output_apk):
         subprocess.run(cmd, check=True)
         print(f"APK successfully zipaligned to {aligned_apk}")
 
-        # Replace the original output APK with the aligned one
+        
         aligned_apk.rename(output_apk)
         print(f"Aligned APK moved to {output_apk}")
 
@@ -208,7 +227,7 @@ def sign_apk(input_apk, output_apk):
     """Sign the APK using apksigner."""
     apksigner_path = os.path.join(BUILD_TOOLS_PATH, 'apksigner')
 
-    # Ensure output path is different from input path
+    
     signed_apk = output_apk.parent / ('signed_' + output_apk.name)
 
     cmd = [
@@ -224,7 +243,7 @@ def sign_apk(input_apk, output_apk):
         subprocess.run(cmd, check=True)
         print(f"APK successfully signed: {signed_apk}")
 
-        # Replace the original output APK with the signed one
+        
         signed_apk.rename(output_apk)
         print(f"Signed APK moved to {output_apk}")
 
@@ -236,19 +255,18 @@ def sign_apk(input_apk, output_apk):
 def download_signed_apk():
     """Serve the signed APK for download"""
     try:
-        # Define the exact path to the APK
+        
         file_path = Path('/Users/alanjoshua/College/SIH/uploads/signed_modified_apk.apk')
         if not file_path.exists():
             print(f"File not found: {file_path}")
             return jsonify({'error': 'File not found'}), 404
-
-        # Serve the APK file
+        
         print(f"Serving signed APK for download: {file_path}")
         return send_file(
             file_path,
             as_attachment=True,
-            download_name='signed_apk.apk',  # Filename for the client
-            mimetype='application/vnd.android.package-archive'  # APK MIME type
+            download_name='signed_apk.apk',
+            mimetype='application/vnd.android.package-archive'
         )
     except Exception as e:
         print(f"Error during file download: {e}")
